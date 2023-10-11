@@ -3,7 +3,7 @@ import articleData from "@/data/articles/articleData";
 import styles from './[article].module.scss';
 import React from 'react';
 
-const newsViewer: React.FC = () => {
+const NewsViewer: React.FC = () => {
     const router = useRouter();
     const { article } = router.query;
 
@@ -78,4 +78,4 @@ const renderContent = (content: string) => {
     )
 }
 
-export default newsViewer;
+export default NewsViewer;
