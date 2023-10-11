@@ -44,7 +44,7 @@ function FadeInSection(props: { children: React.ReactNode }) {
 
   
 
-const team: React.FC = () => {
+const Team: React.FC = () => {
 
     const [index, setIndex] = useState<number | null>(null);
     const [isBioVisible, setIsBioVisible] = useState(false);
@@ -139,4 +139,4 @@ const team: React.FC = () => {
     );
 }; 
 
-export default team;
+export default Team;

@@ -2,6 +2,8 @@
 import Plotly from 'plotly.js';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import styles from './graph.module.scss'
+
+
 const Plot = createPlotlyComponent(Plotly);
 
 import { useState, useEffect } from 'react';
