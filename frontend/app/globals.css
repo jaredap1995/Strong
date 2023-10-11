@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400&display=swap');
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body, html {
+  background-color: black;
+  font-family: 'Raleway', sans-serif;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  transition: opacity 3s ease-in-out;
+}
+
+button{
+  font-family: inherit;
+  background-color: transparent;
+  border: transparent;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px; 
+  height: 8px; 
+}
+
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 4px; 
+  border: 2px solid transparent; 
+  background-clip: content-box; 
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.9); 
+}
+
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+
+ 
+

@@ -1,0 +1,26 @@
+@import 'variables.scss';
+
+@media screen and (min-width: $desktop-break) {
+  .main {
+    width: auto;
+    margin: 0 auto;
+    background-color: black;
+  }
+}
+
+@media screen and (min-width: $mobile-break) and (max-width: $desktop-break) {
+  .main {
+    margin: 0 0px;
+  }
+}
+
+@media screen and (max-width: $mobile-break) {
+  .main {
+    margin: 0 0px;
+  }
+}
+
+.main {
+    
+  min-height: $main-height;
+}

@@ -1,0 +1,55 @@
+.missionContainer{
+    height:100%;
+    width: 100%;
+
+    .missionImage {
+        height: 100%;
+        width: 100%
+    }
+
+    .missionStatementContainer{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        height: 80vh;
+        text-align: center;
+        justify-content: center;
+
+        .missionText {
+          padding: 3em;
+          align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: .2em;
+            line-height: 2;
+        }
+
+        .boldWordStyle{
+            font-size: 1.5rem;
+        }
+    }
+}
+
+@keyframes shimmer {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
+
+  .shimmerEffect {
+    background: linear-gradient(
+      to right,
+      transparent 25%,   
+      #5790e7 50%,   
+      white 100% 
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+    color: transparent;
+    background-clip: text;
+  }
+
