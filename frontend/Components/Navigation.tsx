@@ -77,6 +77,20 @@ const Navigation = () => {
                         </li>
                     </ul>
                 </nav>
+                
+                {/* DropDown Div */}
+                <div className={styles.dropdown}>
+                    <button className={styles.dropBTN}>
+                        <div></div>
+                    </button>
+                    <div className={styles.dropdownContent}>
+                        <Link href={aboutEvent}>About</Link>
+                        <Link href="/history">Media</Link>
+                        <Link href="/team">Team</Link>
+                        <Link href="/mission">Mission</Link>
+                        <Link href="/account">Account</Link>
+                    </div>
+                </div>
 
                 <div className={`${styles.actionButtons}`}>
                         <Link className={`${styles.fullSizeLink} ${styles.shimmerEffect}`} href="/waitlist">

@@ -1,20 +1,85 @@
+@import '_variables.scss';
+
 .waitlistContainer{
-    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
-    background-color: black;
+    overflow-y: scroll;
     color: white;
+    transition: filter 0.3 ease-in-out;
+
+    &.modalActive{
+        filter: blur(5px);
+    }
+
+    .backButton {
+        position: fixed;
+        top: 32px;
+        left: 28px;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        height: 56px;
+        width: 56px;
+        display: inline-block;
+        background: black;
+        color: white; 
+        border-radius: 50px; 
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border: none;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+      
+        // &:hover {
+        //   background-color: lighten(#292D35, 40%); 
+        // }
+      
+        &::before {
+                border-color: white;
+                border-style: solid;
+                border-width: 0 0 4px 4px;
+                content: "";
+                display: block;
+                height: 12px;
+                left: 23px;
+                position: absolute;
+                width: 12px;
+              
+                margin-top: -6px;
+                top: 50%;
+              
+                transition: left 0.3s;
+              
+                transform: rotate( 45deg );
+                -webkit-transform: rotate( 45deg );
+        }
+      
+        &::after {
+            background: white;
+            content: "";
+            display: block;
+            height: 3px;
+            left: 24px;
+            position: absolute;
+            top: 50%;
+            width: 24px;
+          
+            transition: left 0.3s;
+        }
+      
+        &:hover::before, &:hover::after {
+            left: 5px;
+            }
+      }
+      
 
     .waitlistBody{
 
         .waitlistHeader{
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
         }
 
@@ -22,15 +87,12 @@
 
             .waitlistFieldset{
                 all: unset;
-                position: relative;
                 display: block;
                 text-align: center;
-                box-sizing: border-box;
-                padding-top: 40px;
+                margin-top: 40px;
 
                 .waitlistInput{
                     border: none;
-                    height: 40px;
                     width: 100%;
                     background-color: transparent;
                     color: white;
@@ -67,5 +129,39 @@
         }
     }
 
+    @keyframes fadeIn{
+        from{
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
+.modal{
+    background-color: black;
+    color: white;
+    width: 100%;
+    position: absolute;
+    font-size: 2rem;
+    top:20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    opacity: 1;
+    animation: fadeIn 0.5s forwards;
 
+    .closeButton{
+        display: flex;
+        font-size: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding-top: 30px;
+        width: 100%;
+        cursor: pointer;
+    }
 }

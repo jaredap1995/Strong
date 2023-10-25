@@ -10,11 +10,12 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { route } = useRouter();
+  const router  = useRouter();
+  const hideNav = router.pathname === '/waitlist' || router.pathname === '/account';
 
   return (
     <>
-    <Navigation />
+    {!hideNav && <Navigation />}
     
     <PageTransition timeout={300} classNames="page-transition">
       <div className={styles.main}>{children}</div>

@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black; 
+    background-color: #01070b; 
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -24,6 +24,98 @@
       background: linear-gradient(#4a8fe7, #6db2f3);
       z-index: 1;
     }
+
+    .dropdown {
+      display: none;
+      position: relative;
+    }
+
+
+.dropBTN {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 24px;  
+  height: 18px;
+  transition: transform 0.3s ease-in-out;
+
+  &:before, &:after, & > div {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+      transition: all 0.3s ease-in-out;
+  }
+
+  &:before {
+      top: 0;
+  }
+
+  & > div {
+      top: 50%;
+      transform: translateY(-50%);
+  }
+
+  &:after {
+      bottom: 0;
+  }
+
+  &:hover {
+      &:before, &:after, & > div {
+          background-color: #ddd;
+      }
+  }
+}
+
+
+    .dropdownContent {
+      display: none;
+    }
+    
+    .dropdownContent a{
+      display: flex;
+      color: black;
+      justify-content: center;
+      padding: 30px;
+      align-items: center;
+    }
+
+    .blurredContent {
+      filter: blur(5px);
+    }
+
+    @media (max-width: $mobile-break){
+      .menu{
+        display: none;
+      }
+      .dropdown{
+        display: flex;
+      }
+    }
+
+    .dropdown:hover .dropdownContent {
+      display: flex;
+      flex-direction: column;
+      font-size: 2rem;
+      background-color: red;
+      color: black;
+      min-width: 50vw;
+      min-height: 50vh;
+      z-index: 2; 
+      padding-bottom: 50vh;
+      transition: transform 0.5s ease-in-out;
+
+    }
+
+    .dropdownContent a:hover {
+      background-color: #f1f1f1;
+      transform:rotate3d()
+  }
+
+
 }
 
 .navBar.scrolled {
