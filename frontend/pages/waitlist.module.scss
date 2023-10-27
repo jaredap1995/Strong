@@ -32,10 +32,6 @@
         transition: background-color 0.3s ease;
         cursor: pointer;
       
-        // &:hover {
-        //   background-color: lighten(#292D35, 40%); 
-        // }
-      
         &::before {
                 border-color: white;
                 border-style: solid;
@@ -82,86 +78,5 @@
             flex-direction: column;
             align-items: center;
         }
-
-        .userInputForm{
-
-            .waitlistFieldset{
-                all: unset;
-                display: block;
-                text-align: center;
-                margin-top: 40px;
-
-                .waitlistInput{
-                    border: none;
-                    width: 100%;
-                    background-color: transparent;
-                    color: white;
-                    border-bottom: 0.5px solid #5e5e5e;
-                    transition: border-color .15s ease-in-out;
-                }
-
-                .waitlistError{
-                    color: red;
-                    font-size: 12px;
-                    display: flex;
-                }
-            }
-
-            button{
-                height: 48px;
-                padding: 0 50px 2px;
-                border: 1px solid #fff;
-                border-radius: 25px;
-                color: white;
-                margin-top: 40px;
-                cursor: pointer;
-                font-size: 18px;
-                font-weight: 600;
-                letter-spacing: .01em;
-
-                // Center
-
-                &:hover{
-                    background-color: #fff;
-                    color: black;
-                }
-            }
-        }
-    }
-
-    @keyframes fadeIn{
-        from{
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-}
-.modal{
-    background-color: black;
-    color: white;
-    width: 100%;
-    position: absolute;
-    font-size: 2rem;
-    top:20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    opacity: 1;
-    animation: fadeIn 0.5s forwards;
-
-    .closeButton{
-        display: flex;
-        font-size: 1rem;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        padding-top: 30px;
-        width: 100%;
-        cursor: pointer;
     }
 }

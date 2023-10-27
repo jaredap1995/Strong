@@ -71,7 +71,7 @@ const Navigation = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/account">
+                            <Link href="/signIn">
                                 Account
                             </Link>
                         </li>

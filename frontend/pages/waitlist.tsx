@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './waitlist.module.scss';
-import { mock } from 'node:test';
+import sharedStyles from './shared.module.scss';
 import { useRouter } from 'next/router';
 
 const Waitlist: React.FC = () => {
@@ -48,49 +48,49 @@ const Waitlist: React.FC = () => {
     return (
         <div>
             <div className={`${styles.waitlistContainer} ${customModal ? styles.modalActive : ''}`}>
-                <button className={styles.backButton} onClick={backClick}></button>
+                <button className={sharedStyles.backButton} onClick={backClick}></button>
                 <div className={styles.waitlistBody}>
                     <div className={styles.waitlistHeader}>
                         <h1>Strong Vision Initial Product Launch</h1>
                         <h2>Join the waitlist for priority access</h2>
                     </div>
-                    <form className={styles.userInputForm} onSubmit={handleSubmit}>
-                        <fieldset className={styles.waitlistFieldset}>
+                    <form className={sharedStyles.userInputForm} onSubmit={handleSubmit}>
+                        <fieldset className={sharedStyles.waitlistFieldset}>
                             <input 
                                 type="text" 
                                 name="firstname" 
-                                className={styles.waitlistInput} 
+                                className={sharedStyles.waitlistInput} 
                                 placeholder='First name *'
                                 onChange={handleInputChange}
                             />
                             {isSubmitted && !formData.firstname && 
-                                <p className={styles.waitlistError}>First name is required</p>
+                                <p className={sharedStyles.waitlistError}>First name is required</p>
                             }
                         </fieldset>
 
-                        <fieldset className={styles.waitlistFieldset}>
+                        <fieldset className={sharedStyles.waitlistFieldset}>
                             <input 
                                 type="text" 
                                 name="lastname" 
-                                className={styles.waitlistInput} 
+                                className={sharedStyles.waitlistInput} 
                                 placeholder='Last name *'
                                 onChange={handleInputChange}
                             />
                             {isSubmitted && !formData.lastname && 
-                                <p className={styles.waitlistError}>Last name is required</p>
+                                <p className={sharedStyles.waitlistError}>Last name is required</p>
                             }
                         </fieldset>
 
-                        <fieldset className={styles.waitlistFieldset}>
+                        <fieldset className={sharedStyles.waitlistFieldset}>
                             <input 
                                 type="text" 
                                 name="email" 
-                                className={styles.waitlistInput} 
+                                className={sharedStyles.waitlistInput} 
                                 placeholder='Email *'
                                 onChange={handleInputChange}
                             />
                             {isSubmitted && !formData.email && 
-                                <p className={styles.waitlistError}>Email is required</p>
+                                <p className={sharedStyles.waitlistError}>Email is required</p>
                             }
                         </fieldset>
 
@@ -100,10 +100,10 @@ const Waitlist: React.FC = () => {
             </div>
             <div>
                     {customModal && (
-                            <div className={styles.modal}>
+                            <div className={sharedStyles.modal}>
                                 <div>
                                     This email has already been registered
-                                    <button className={styles.closeButton} onClick={() => setCustomModal(false)}>Close</button>
+                                    <button className={sharedStyles.closeButton} onClick={() => setCustomModal(false)}>Close</button>
                                 </div>
                             </div>
                         )}

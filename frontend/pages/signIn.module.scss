@@ -1,0 +1,61 @@
+@import '_variables.scss';
+
+.accountPageContainer{
+    display: flex;
+    background-color: black;
+    height: $main-height;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+
+    &.modalActive{
+        filter: blur(5px);
+    }
+
+      .accountPageContent{
+        margin-top: 50px;
+        height: 100%;
+        width: 40%;
+
+        .authHeader{
+            margin-top: 50px;
+            align-items: center;
+            background: gray;
+            border-radius: 30px;
+            display: flex;
+            width: auto;
+            justify-content: space-around;
+            padding: 14px 20px;
+
+        .authHeaderText{
+            font-size: 1.5rem;
+        }
+
+        .createAccountButton{
+            color: white;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        }
+
+    .textFormContainer{
+
+        display: flex;
+        flex-direction: column;
+        height: 70%;
+        justify-content: center;
+
+        .signInFont{
+            color: white;
+        }
+
+        .signInSubmit{
+            width: 100%;
+        }
+
+      }
+
+      }
+}
+
