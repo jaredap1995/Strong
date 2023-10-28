@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { event } from "jquery";
 
-const account: React.FC = () => {
+const NewAccount: React.FC = () => {
 
     const [signedIn, setSignedIn] = useState(false)
     const [noAccount, setNoAccount] = useState(false)
@@ -166,4 +166,4 @@ const account: React.FC = () => {
     )
 }
 
-export default account;
+export default NewAccount;
