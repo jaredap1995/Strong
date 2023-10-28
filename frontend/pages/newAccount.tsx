@@ -70,7 +70,7 @@ const NewAccount: React.FC = () => {
                     {/* this is the content container...text to be removed */}
                     <div className={styles.newAuthHeader}>
                         <span className={styles.newAuthHeaderText}> Already have an account?</span>
-                        <Link className={styles.newCreateAccountButton} href="./signIn"> Sign In </Link>
+                        <Link className={styles.newCreateAccountButton} href="./SignIn"> Sign In </Link>
                     </div>
                     <div className={styles.newTextFormContainer}>
                         <h1 className={styles.newSignInFont}> Join the Revolution. Create your Strong Account. </h1>
