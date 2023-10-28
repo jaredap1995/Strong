@@ -65,7 +65,7 @@ const SignIn: React.FC = () => {
                 <div className={styles.accountPageContent}>
                     {/* this is the content container...text to be removed */}
                     <div className={styles.authHeader}>
-                        <span className={styles.authHeaderText}> Don't have an account?</span>
+                        <span className={styles.authHeaderText}> Dont have an account?</span>
                         <Link className={styles.createAccountButton} href="./newAccount"> Create Account </Link>
                     </div>
                     <div className={styles.textFormContainer}>
