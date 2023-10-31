@@ -3,12 +3,12 @@ import styles from './newAccount.module.scss';
 import sharedStyles from './shared.module.scss'
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { event } from "jquery";
 
 const NewAccount: React.FC = () => {
 
     const [signedIn, setSignedIn] = useState(false)
-    const [noAccount, setNoAccount] = useState(false)
+    const [newAccount, setNewAccount] = useState(false)
+    const[repeatAccount, setRepeatAccount] = useState(false)
     const [formData, setFormData] = useState({
         firstname: "",
         lastname: "",
@@ -19,13 +19,22 @@ const NewAccount: React.FC = () => {
     })
 
     interface mockDB {
+        firstname: string
+        lastname: string
+        phone?: string
         email: string
         password: string
+        confirmPassword: string
     }
 
+
     const mockDB = {
+        firstname: "Jared",
+        lastname: "Perez",
+        phone: "2",
         email: "hello",
-        password: "world"
+        password: "world",
+        confirmPassword: "world"
     }
 
     // back button function
@@ -39,13 +48,14 @@ const NewAccount: React.FC = () => {
         event.preventDefault();
         setSignedIn(true);
 
-        if (formData.email && formData.password) {
-            if ((formData.email === mockDB.email) && (formData.password === mockDB.password)){
-                // setting thank you for now, will work out logic for an actual sign in
-                window.location.href = './thank-you'
-            } else {
-                setNoAccount(true);
+        const { firstname, lastname, phone, email, password, confirmPassword } = formData;
+
+        if (email && password && firstname && lastname && confirmPassword) {
+            if ((email === mockDB.email) && (firstname === mockDB.firstname) && (lastname === mockDB.lastname) ){
+                setRepeatAccount(true)
                 return
+            } else {
+                setNewAccount(true);
             }
         }
 
@@ -64,13 +74,13 @@ const NewAccount: React.FC = () => {
 
     return (
         <div>
-            <div className={`${styles.newAccountContainer} ${noAccount ? styles.modalActive : ''}`}>
+            <div className={`${styles.newAccountContainer} ${newAccount ? styles.modalActive : ''} ${repeatAccount ? styles.modalActive: ''}`}>
                 <button className={sharedStyles.backButton} onClick={backClick}></button>
                 <div className={styles.newAccountPageContent}>
                     {/* this is the content container...text to be removed */}
                     <div className={styles.newAuthHeader}>
                         <span className={styles.newAuthHeaderText}> Already have an account?</span>
-                        <Link className={styles.newCreateAccountButton} href="./SignIn"> Sign In </Link>
+                        <Link className={styles.newCreateAccountButton} href="./signIn"> Sign In </Link>
                     </div>
                     <div className={styles.newTextFormContainer}>
                         <h1 className={styles.newSignInFont}> Join the Revolution. Create your Strong Account. </h1>
@@ -153,12 +163,23 @@ const NewAccount: React.FC = () => {
                 </div>
             </div>
             <div>
-                {noAccount && (
+                {newAccount && (
                     <div className={sharedStyles.modal}> 
                         <div> 
-                            No account with that information currently exists
-                            <button className={sharedStyles.closeButton} onClick={() => setNoAccount(false)}>Close</button>
+                            Thank you for creating an account! You are now logged in and part of the Strong Revolution.
+                            <button className={sharedStyles.closeButton} onClick={() => setNewAccount(false)}>Close</button>
                         </div>
+                    </div>
+                )}
+            </div>
+            <div>
+                {repeatAccount && (
+                    <div className={sharedStyles.modal}>
+                        <div> 
+                            The email associated with this account already exists. Please try signing in instead.
+                            <button className={sharedStyles.closeButton} onClick={() => setRepeatAccount(false)}>Close</button>
+                        </div>
+
                     </div>
                 )}
             </div>

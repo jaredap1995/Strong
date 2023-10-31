@@ -81,7 +81,7 @@ const Team: React.FC = () => {
         visibility: 'visible',
         position: 'relative',
         color: 'white',
-        transition: 'opacity 0.8s ease-out, visibility 0.8s ease-out',
+        transition: 'opacity 0.8s ease-out, visibility 0.8s ease-out'
     }
 
     if (index == null) {
@@ -126,11 +126,10 @@ const Team: React.FC = () => {
                     <div className={`${styles.fullBio}`} 
                      style={isBioVisible ? {...defaultBioStyle, ...visibleBioStyle, display: 'flex'} : defaultBioStyle}>
                         {employee.bio}
-                    </div>
-
-                    <button className={styles.closeButton} onClick={bioToggle} style={{ display: isBioVisible ? 'block' : 'none' }}>
+                        <button className={styles.closeButton} onClick={bioToggle} style={{ display: isBioVisible ? 'block' : 'none' }}>
                         Close bio
                     </button>
+                    </div>
                 </div>
             </div>  
             </FadeInSection>               
