@@ -10,18 +10,31 @@ const SignIn: React.FC = () => {
     const [signedIn, setSignedIn] = useState(false)
     const [noAccount, setNoAccount] = useState(false)
     const [formData, setFormData] = useState({
+        firstname: "",
+        lastname: "",
+        phone: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
 
     interface mockDB {
+        firstname: string
+        lastname: string
+        phone?: string
         email: string
         password: string
+        confirmPassword: string
     }
 
+
     const mockDB = {
+        firstname: "Jared",
+        lastname: "Perez",
+        phone: "2",
         email: "hello",
-        password: "world"
+        password: "world",
+        confirmPassword: "world"
     }
 
     // back button function
@@ -33,12 +46,13 @@ const SignIn: React.FC = () => {
     // Function to submit signIn
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        setSignedIn(true);
 
         if (formData.email && formData.password) {
             if ((formData.email === mockDB.email) && (formData.password === mockDB.password)){
+                setSignedIn(true);
+                const user = mockDB.email
                 // setting thank you for now, will work out logic for an actual sign in
-                window.location.href = './thank-you'
+                return 
             } else {
                 setNoAccount(true);
                 return
@@ -104,6 +118,16 @@ const SignIn: React.FC = () => {
                         <div> 
                             No account with that information currently exists
                             <button className={sharedStyles.closeButton} onClick={() => setNoAccount(false)}>Close</button>
+                        </div>
+                    </div>
+                )}
+            </div>
+            <div>
+                {signedIn && (
+                    <div className={sharedStyles.modal}> 
+                        <div> 
+                            Welcome {mockDB.firstname}
+                            <button className={sharedStyles.closeButton} onClick={() => setSignedIn(false)}>Close</button>
                         </div>
                     </div>
                 )}
