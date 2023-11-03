@@ -3,7 +3,7 @@ import styles from './signIn.module.scss';
 import sharedStyles from './shared.module.scss'
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { event } from "jquery";
+import { useUser } from "@/contexts/userContexts";
 
 const SignIn: React.FC = () => {
 
@@ -43,15 +43,16 @@ const SignIn: React.FC = () => {
         router.back();
     }
 
+    const { signIn } = useUser()
     // Function to submit signIn
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
         if (formData.email && formData.password) {
             if ((formData.email === mockDB.email) && (formData.password === mockDB.password)){
+                signIn(formData.email, formData.password);
                 setSignedIn(true);
                 const user = mockDB.email
-                // setting thank you for now, will work out logic for an actual sign in
                 return 
             } else {
                 setNoAccount(true);
@@ -107,7 +108,7 @@ const SignIn: React.FC = () => {
                                 <p className={sharedStyles.waitlistError}>Password is required</p>}
                             </fieldset>
 
-                            <button type="submit" className={styles.signInSubmit}> Sign in</button>
+                            <button type="submit" className={styles.signInSubmit}> Sign in </button>
                         </form>
                     </div>
                 </div>

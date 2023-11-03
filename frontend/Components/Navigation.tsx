@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useState } from 'react'
+import { useUser } from "../contexts/userContexts"
 
 
 const LOGO = '/logo/logo2.png';
@@ -13,9 +14,9 @@ const Navigation = () => {
     const router = useRouter();
 
     const aboutEvent = router.pathname === '/' ? "#about" : '/#about';
-
     const currentPage = router.pathname
-    console.log(currentPage)
+
+    const { user, signOut } = useUser()
 
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -70,11 +71,19 @@ const Navigation = () => {
                                 Mission
                             </Link>
                         </li>
+                        {user ? (
+                            <>
+                            <li> 
+                                <a>Welcome {user.firstname}</a> 
+                                <button onClick={signOut}> Sign Out</button>
+                            </li>
+                            </>
+                        ): 
                         <li>
                             <Link href="/signIn">
                                 Account
                             </Link>
-                        </li>
+                        </li>}
                     </ul>
                 </nav>
                 
