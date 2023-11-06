@@ -157,15 +157,15 @@
 }
 
 nav .menu {
-    list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     font-size: 1.4rem;
-    // background-color: red;
 
     li {
         margin: 0 30px;
+        position: relative;
+
     }
 
     a {
@@ -175,27 +175,7 @@ nav .menu {
         border-radius: 5px;
         text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
         transition: color 0.3s ease;
-
-        &:hover {
-          color: #fff 
-        }
-
-        &:active{
-          color: #fff
-        }
-    }
-
-    button {
         cursor: pointer;
-        margin: 0 25px;
-        font-size: 1.3rem;
-        font-weight: bolder;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.5);  
-        padding: 0px 10px;
-        border-radius: 5px;
-        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-        transition: color 0.3s ease;
 
         &:hover {
           color: #fff 
@@ -205,7 +185,40 @@ nav .menu {
           color: #fff
         }
     }
-}
+
+    .signOutDropdown{
+      background-color: transparent;
+      // background-color: yellow;
+
+      &:hover .signOutContent{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 16px;
+          height: 150px;
+        }
+
+      }
+        .signOutContent{
+          display: none;
+          // box-shadow: rgba(114, 118, 121, 0.65) 0px 0px 0px 2px;
+          position: absolute; 
+          bottom: 100%; 
+          left: 0;
+          font-size: 1.2rem;
+          background-color: transparent; 
+          // background-color: yellow;
+          // margin-bottom: 36px;
+          width: 100%; 
+          z-index: 10; 
+        }
+
+        // button{
+          // padding-top: 12px;
+        // }
+  }
+
 
 @keyframes shimmer {
     0% {

@@ -18,25 +18,6 @@ const SignIn: React.FC = () => {
         confirmPassword: ""
     })
 
-    interface mockDB {
-        firstname: string
-        lastname: string
-        phone?: string
-        email: string
-        password: string
-        confirmPassword: string
-    }
-
-
-    const mockDB = {
-        firstname: "Jared",
-        lastname: "Perez",
-        phone: "2",
-        email: "hello",
-        password: "world",
-        confirmPassword: "world"
-    }
-
     // back button function
     const router = useRouter();
     const backClick = () => {
@@ -49,15 +30,11 @@ const SignIn: React.FC = () => {
         event.preventDefault();
 
         if (formData.email && formData.password) {
-            if ((formData.email === mockDB.email) && (formData.password === mockDB.password)){
                 signIn(formData.email, formData.password);
                 setSignedIn(true);
-                const user = mockDB.email
-                return 
-            } else {
-                setNoAccount(true);
-                return
-            }
+                router.push("./myAccount")
+        } else {
+            setNoAccount(true)
         }
 
     }
@@ -127,7 +104,7 @@ const SignIn: React.FC = () => {
                 {signedIn && (
                     <div className={sharedStyles.modal}> 
                         <div> 
-                            Welcome {mockDB.firstname}
+                            Thank you for signing In
                             <button className={sharedStyles.closeButton} onClick={() => setSignedIn(false)}>Close</button>
                         </div>
                     </div>

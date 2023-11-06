@@ -1,5 +1,26 @@
 import { createContext, useContext, ReactNode, useState } from 'react';
 
+
+interface mockDB {
+    firstname: string
+    lastname: string
+    phone?: string
+    email: string
+    password: string
+    confirmPassword: string
+}
+
+
+const mockDB = {
+    firstname: "Jared",
+    lastname: "Perez",
+    phone: "2",
+    email: "hello",
+    password: "world",
+    confirmPassword: "world"
+}
+
+
 type User = {
     firstname: string;
     lastname: string;
@@ -19,12 +40,16 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [user, setUser] = useState<User | null>(null);
 
     const signIn = (email: string, password: string) => {
-        setUser({
-            firstname: "John",
-            lastname: "Doe",
-            email,
-            password
-        });
+        if (email === mockDB.email && password === mockDB.password){
+            setUser({
+                firstname: "John",
+                lastname: "Doe",
+                email,
+                password
+            });
+        } else {
+            alert(" No account found")
+        }
     };
 
     const signOut = () => {

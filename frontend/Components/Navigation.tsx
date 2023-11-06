@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useState } from 'react'
 import { useUser } from "../contexts/userContexts"
+import sharedStyles from '../pages/shared.module.scss'
 
 
 const LOGO = '/logo/logo2.png';
@@ -73,9 +74,14 @@ const Navigation = () => {
                         </li>
                         {user ? (
                             <>
-                            <li> 
-                                <a>Welcome {user.firstname}</a> 
-                                <button onClick={signOut}> Sign Out</button>
+                            <li className={styles.signOutDropdown}> 
+                                <div className={styles.dropButton}>
+                                    <a> Welcome {user.firstname} </a> 
+                                </div>
+                                <div className={styles.signOutContent}>
+                                    <Link className={sharedStyles.navBarButton} href="myAccount"> Account </Link>
+                                    <button onClick={signOut} className={sharedStyles.navBarButton}> Sign Out</button>
+                                </div>
                             </li>
                             </>
                         ): 
