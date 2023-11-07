@@ -100,16 +100,6 @@ const SignIn: React.FC = () => {
                     </div>
                 )}
             </div>
-            <div>
-                {signedIn && (
-                    <div className={sharedStyles.modal}> 
-                        <div> 
-                            Thank you for signing In
-                            <button className={sharedStyles.closeButton} onClick={() => setSignedIn(false)}>Close</button>
-                        </div>
-                    </div>
-                )}
-            </div>
         </div>
     )
 }

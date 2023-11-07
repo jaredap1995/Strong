@@ -1,5 +1,96 @@
 @import '_variables.scss';
 
-.test{
-    color: white;
+.myAccountContainer{
+    // background-color: red;
+    display: flex;
+    height: $main-height;
+
+    .myAccountSidebar{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 100px;
+        width: 150px;
+        font-size: 1.3rem;
+        margin-left: 50px;
+        color: white;
+
+        .sidebarOptions{
+            margin-top: 50px; 
+            display: flex;
+            width: 100%;
+            padding-left: 0;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 100px;
+
+            a {
+                color: rgba(255, 255, 255, 0.5);
+                margin-left: 0;
+                padding-left: 0;
+
+
+                &:hover {
+                    color: #fff 
+                  }
+          
+                  &:active{
+                    color: #fff
+                  }
+            }
+
+            button{
+                margin-left: 0;
+                padding-left: 0;
+            }
+
+        }
+    }
+
+
+    .myDetailsPage{
+        color: white;
+        margin-top: 75px;
+        margin-left: 100px;
+        // background-color: yellow;
+        width: 45vw;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .detailsPageHeader{
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            color: green;
+        }
+
+
+        form{
+            width: 100%;
+
+            fieldset{
+                text-align: left;
+            }
+
+            input{
+                margin-top: 15px;
+            }
+            
+            .saveSubmitButton{
+                float: right;
+            }
+           
+        }
+    }
+
+
+    .inquiryPage{
+
+        .inquiryPageHeader{
+            color: white
+    }
+}
+
 }

@@ -1,3 +1,4 @@
+import { mock } from 'node:test';
 import { createContext, useContext, ReactNode, useState } from 'react';
 
 
@@ -20,18 +21,23 @@ const mockDB = {
     confirmPassword: "world"
 }
 
+interface newDetails {
+    newDetails: User
+}
+
 
 type User = {
-    firstname: string;
-    lastname: string;
-    email: string;
-    password: string;
+    firstname: string | undefined;
+    lastname: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
 }
 
 type UserContextType = {
     user: User | null;
     signIn: (email: string, password: string) => void;
     signOut: () => void;
+    updateUser: (newDetails: User | null) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -42,10 +48,10 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const signIn = (email: string, password: string) => {
         if (email === mockDB.email && password === mockDB.password){
             setUser({
-                firstname: "John",
-                lastname: "Doe",
-                email,
-                password
+                firstname: mockDB.firstname,
+                lastname: mockDB.lastname,
+                email: mockDB.email,
+                password: mockDB.password
             });
         } else {
             alert(" No account found")
@@ -56,8 +62,20 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setUser(null);
     }
 
+    const updateUser = (newDetails: User | null) => {
+        setUser((currentUser) => {
+            return {
+                ...currentUser,
+                firstname: newDetails?.firstname ?? currentUser?.firstname,
+                lastname: newDetails?.lastname ?? currentUser?.lastname,
+                email: newDetails?.email ?? currentUser?.email,
+                password: newDetails?.password ?? currentUser?.password,
+            };
+        });
+    };
+
     return (
-        <UserContext.Provider value={{ user, signIn, signOut }}>
+        <UserContext.Provider value={{ user, signIn, signOut, updateUser }}>
             {children}
         </UserContext.Provider>
     )
