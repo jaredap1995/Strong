@@ -140,6 +140,12 @@ var MyAccount: React.FC = () => {
             {!isDetails && (
                 <div className={styles.inquiryPage}>
                     <h2 className={styles.inquiryPageHeader}> Inquiries </h2> 
+                    <div className={styles.inquiryPageContent}> 
+                        <span> Have a question about Strong?</span>
+                        <a href="mailto: support@Strong.com" className={styles.emailHyperlink}> 
+                            <span className={styles.emailHyperlink}>support@Strong.com</span>
+                        </a>
+                    </div>
                 </div>    
             )}
         </div>

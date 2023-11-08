@@ -9,7 +9,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        margin-top: 100px;
+        margin-top: 80px;
         width: 150px;
         font-size: 1.3rem;
         margin-left: 50px;
@@ -23,7 +23,7 @@
             flex-direction: column;
             justify-content: space-around;
             align-items: flex-start;
-            gap: 100px;
+            gap: 30px;
 
             a {
                 color: rgba(255, 255, 255, 0.5);
@@ -63,7 +63,7 @@
             display: flex;
             width: 100%;
             justify-content: flex-start;
-            color: green;
+            color: white;
         }
 
 
@@ -87,9 +87,32 @@
 
 
     .inquiryPage{
+        // background-color: red;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 80px;
+        margin-left: 150px;
+        width: 40%;
 
         .inquiryPageHeader{
-            color: white
+            color: white;
+            padding-bottom: 50px;
+        }
+
+        .inquiryPageContent{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+
+        .emailHyperlink {
+            color: white;
+        }
+
+        span{
+            color: white;
+        }
     }
 }
 
