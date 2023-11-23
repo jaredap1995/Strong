@@ -4,6 +4,7 @@ import styles from './myAccount.module.scss'
 import { useState, useEffect } from "react";
 import sharedStyles from './shared.module.scss'
 import { useUser } from "@/contexts/userContexts";
+import { useRouter } from "next/router";
 
 var MyAccount: React.FC = () => {
 
@@ -22,9 +23,14 @@ var MyAccount: React.FC = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        if (detailsData.firstname !== user?.firstname || detailsData.lastname !== user?.lastname || detailsData.password !== user?.password || detailsData.email !== user?.email) {
+        if (detailsData.firstname !== user?.firstname || 
+            detailsData.lastname !== user?.lastname || 
+            detailsData.password !== user?.password || 
+            detailsData.email !== user?.email) {
             updateUser(detailsData)
         }
+
+        setIsEditMode(false)
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +42,17 @@ var MyAccount: React.FC = () => {
         
     };
 
+    const router = useRouter()
+    const handleCancel = () => {
+        setDetailsaData({
+            firstname: user?.firstname || '',
+            lastname: user?.lastname || '',
+            email: user?.email || '', 
+            password: user?.password || '' 
+        });
+        setIsEditMode(false)
+    }
+
 
     useEffect(() => {
         if (user) {
@@ -43,8 +60,10 @@ var MyAccount: React.FC = () => {
                 firstname: user.firstname || '',
                 lastname: user.lastname || '',
                 email: user.email || '', 
-                password: '' 
+                password: user.password || '' 
             });
+        } else {
+            router.push('./signIn')
         }
     }, [user]);
 
@@ -115,7 +134,7 @@ var MyAccount: React.FC = () => {
                     <fieldset className={sharedStyles.waitlistFieldset}>
                         Password
                         <input 
-                        type="text"
+                        type="password"
                         name="password"
                         className={sharedStyles.waitlistInput}
                         value={detailsData.password}
@@ -125,7 +144,14 @@ var MyAccount: React.FC = () => {
 
                     </fieldset>
 
-                    <button type="button" onClick={() => setIsEditMode(!isEditMode)}>
+                    <button type="button" onClick={
+                        () => {
+                        if (isEditMode) {
+                            handleCancel()
+                        } else {
+                            setIsEditMode(true)
+                        }
+                    }}>
                         {isEditMode ? 'Cancel': 'Edit'}
                     </button>
 

@@ -1,5 +1,6 @@
 import { mock } from 'node:test';
 import { createContext, useContext, ReactNode, useState } from 'react';
+import { useRouter } from "next/router";
 
 
 interface mockDB {
@@ -35,7 +36,7 @@ type User = {
 
 type UserContextType = {
     user: User | null;
-    signIn: (email: string, password: string) => void;
+    signIn: (email: string, password: string) => boolean;
     signOut: () => void;
     updateUser: (newDetails: User | null) => void;
 }
@@ -44,8 +45,9 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+    const router = useRouter();
 
-    const signIn = (email: string, password: string) => {
+    const signIn = (email: string, password: string): boolean => {
         if (email === mockDB.email && password === mockDB.password){
             setUser({
                 firstname: mockDB.firstname,
@@ -53,8 +55,13 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 email: mockDB.email,
                 password: mockDB.password
             });
-        } else {
-            alert(" No account found")
+            router.push("./myAccount");
+            return true;
+        } else if (!email || !password){
+            return true
+        }
+        else {
+            return false
         }
     };
 
@@ -64,6 +71,9 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const updateUser = (newDetails: User | null) => {
         setUser((currentUser) => {
+            // Run call to backend database to change current User based on new updated
+            // user data
+
             return {
                 ...currentUser,
                 firstname: newDetails?.firstname ?? currentUser?.firstname,

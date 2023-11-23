@@ -7,6 +7,7 @@ import { useUser } from "@/contexts/userContexts";
 
 const SignIn: React.FC = () => {
 
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const [signedIn, setSignedIn] = useState(false)
     const [noAccount, setNoAccount] = useState(false)
     const [formData, setFormData] = useState({
@@ -26,14 +27,11 @@ const SignIn: React.FC = () => {
 
     const { signIn } = useUser()
     // Function to submit signIn
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-
-        if (formData.email && formData.password) {
-                signIn(formData.email, formData.password);
-                setSignedIn(true);
-                router.push("./myAccount")
-        } else {
+        setIsSubmitted(true);
+        const success: boolean = await signIn(formData.email, formData.password);
+        if (!success) {
             setNoAccount(true)
         }
 
@@ -71,6 +69,10 @@ const SignIn: React.FC = () => {
                                 placeholder="Email"
                                 onChange={handleInputChange}
                                 />
+
+                                {isSubmitted && !formData.email && 
+                                    <p className={sharedStyles.waitlistError}> Email is required</p>
+                                }
                             </fieldset>
 
                             <fieldset className={sharedStyles.waitlistFieldset}>
@@ -81,7 +83,7 @@ const SignIn: React.FC = () => {
                                 placeholder="Password"
                                 onChange={handleInputChange}
                                 />
-                                {signedIn && !formData.password && 
+                                {isSubmitted && !formData.password && 
                                 <p className={sharedStyles.waitlistError}>Password is required</p>}
                             </fieldset>
 
@@ -95,7 +97,10 @@ const SignIn: React.FC = () => {
                     <div className={sharedStyles.modal}> 
                         <div> 
                             No account with that information currently exists
-                            <button className={sharedStyles.closeButton} onClick={() => setNoAccount(false)}>Close</button>
+                            <button className={sharedStyles.closeButton} onClick={() => 
+                                {setNoAccount(false)
+                                setIsSubmitted(false)
+                            }}>Close</button>
                         </div>
                     </div>
                 )}

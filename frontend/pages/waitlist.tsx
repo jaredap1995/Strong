@@ -19,6 +19,7 @@ const Waitlist: React.FC = () => {
     }
 
 
+    // Remember to remove this line and correctly import mockDB from userContexts
     const mockDB: string[] = ['1995@gmail.com'];
 
     const handleSubmit = (event: React.FormEvent) => {
