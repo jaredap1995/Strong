@@ -3,9 +3,11 @@ import styles from './newAccount.module.scss';
 import sharedStyles from './shared.module.scss'
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useUser } from "@/contexts/userContexts";
 
 const NewAccount: React.FC = () => {
 
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const [signedIn, setSignedIn] = useState(false)
     const [newAccount, setNewAccount] = useState(false)
     const[repeatAccount, setRepeatAccount] = useState(false)
@@ -13,29 +15,11 @@ const NewAccount: React.FC = () => {
         firstname: "",
         lastname: "",
         phone: "",
+        username: "",
         email: "",
         password: "",
         confirmPassword: ""
     })
-
-    interface mockDB {
-        firstname: string
-        lastname: string
-        phone?: string
-        email: string
-        password: string
-        confirmPassword: string
-    }
-
-
-    const mockDB = {
-        firstname: "Jared",
-        lastname: "Perez",
-        phone: "2",
-        email: "hello",
-        password: "world",
-        confirmPassword: "world"
-    }
 
     // back button function
     const router = useRouter();
@@ -43,21 +27,24 @@ const NewAccount: React.FC = () => {
         router.back();
     }
 
+    const { signUp } = useUser()
     // Function to submit signIn
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        setSignedIn(true);
+        setIsSubmitted(true);
+        const success: boolean = await signUp(formData);
+        if (success) setNewAccount(true);
 
-        const { firstname, lastname, phone, email, password, confirmPassword } = formData;
+        // const { firstname, lastname, phone, email, password, confirmPassword } = formData;
 
-        if (email && password && firstname && lastname && confirmPassword) {
-            if ((email === mockDB.email) && (firstname === mockDB.firstname) && (lastname === mockDB.lastname) ){
-                setRepeatAccount(true)
-                return
-            } else {
-                setNewAccount(true);
-            }
-        }
+        // if (email && password && firstname && lastname && confirmPassword) {
+        //     if ((email === mockDB.email) && (firstname === mockDB.firstname) && (lastname === mockDB.lastname) ){
+        //         setRepeatAccount(true)
+        //         return
+        //     } else {
+        //         setNewAccount(true);
+        //     }
+        // }
 
     }
 
@@ -123,13 +110,25 @@ const NewAccount: React.FC = () => {
                             <fieldset className={sharedStyles.waitlistFieldset}>
                                 <input 
                                 type="text"
+                                name="username"
+                                className={sharedStyles.waitlistInput}
+                                placeholder="username"
+                                onChange={handleInputChange}
+                                />
+                                {signedIn && !formData.username && 
+                                <p className={sharedStyles.waitlistError}>Username is required</p>}
+                            </fieldset>
+
+                            <fieldset className={sharedStyles.waitlistFieldset}>
+                                <input 
+                                type="text"
                                 name="email"
                                 className={sharedStyles.waitlistInput}
-                                placeholder="Email"
+                                placeholder="email"
                                 onChange={handleInputChange}
                                 />
                                 {signedIn && !formData.email && 
-                                <p className={sharedStyles.waitlistError}>Email is required</p>}
+                                <p className={sharedStyles.waitlistError}>Username is required</p>}
                             </fieldset>
 
                             <fieldset className={sharedStyles.waitlistFieldset}>
@@ -157,7 +156,7 @@ const NewAccount: React.FC = () => {
                                 <p className={sharedStyles.waitlistError}>Confirm your password</p>}
                             </fieldset>
 
-                            <button type="submit" className={styles.newSignInSubmit}> Sign in</button>
+                            <button type="submit" className={styles.newSignInSubmit}> Sign up </button>
                         </form>
                     </div>
                 </div>

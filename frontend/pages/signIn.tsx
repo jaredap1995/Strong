@@ -8,7 +8,6 @@ import { useUser } from "@/contexts/userContexts";
 const SignIn: React.FC = () => {
 
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [signedIn, setSignedIn] = useState(false)
     const [noAccount, setNoAccount] = useState(false)
     const [formData, setFormData] = useState({
         firstname: "",

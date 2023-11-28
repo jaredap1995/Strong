@@ -1,30 +1,6 @@
-import { mock } from 'node:test';
 import { createContext, useContext, ReactNode, useState } from 'react';
 import { useRouter } from "next/router";
-
-
-interface mockDB {
-    firstname: string
-    lastname: string
-    phone?: string
-    email: string
-    password: string
-    confirmPassword: string
-}
-
-
-const mockDB = {
-    firstname: "Jared",
-    lastname: "Perez",
-    phone: "2",
-    email: "hello",
-    password: "world",
-    confirmPassword: "world"
-}
-
-interface newDetails {
-    newDetails: User
-}
+import { fetchUser, createUser } from "../data/api";
 
 
 type User = {
@@ -36,9 +12,20 @@ type User = {
 
 type UserContextType = {
     user: User | null;
-    signIn: (email: string, password: string) => boolean;
+    signIn: (email: string, password: string) => Promise<boolean>;
+    signUp: (data: UserData) => Promise<boolean>;
     signOut: () => void;
     updateUser: (newDetails: User | null) => void;
+}
+
+type UserData = {
+    firstname?: string;
+    lastname?: string;
+    phone?: string;
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword?: string;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -47,23 +34,48 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [user, setUser] = useState<User | null>(null);
     const router = useRouter();
 
-    const signIn = (email: string, password: string): boolean => {
-        if (email === mockDB.email && password === mockDB.password){
-            setUser({
-                firstname: mockDB.firstname,
-                lastname: mockDB.lastname,
-                email: mockDB.email,
-                password: mockDB.password
-            });
+    const signIn = async (email: string, password: string) => {
+        try {
+            const response = await fetchUser(email);
+            setUser(response.data);
             router.push("./myAccount");
             return true;
-        } else if (!email || !password){
-            return true
-        }
-        else {
+        } catch (error: unknown) {
+            console.error("Error signing in: ", (error as Error).message);
             return false
         }
     };
+
+    const signUp = async (data: UserData) => {
+        try {
+            await createUser(data);
+            signIn(data.username, data.password);
+            return true;
+        } catch (error: unknown) {
+            console.error("Error Creating User: ", (error as Error).message)
+            return false
+        }
+    }
+    
+    
+    // *******Old sign in function*****
+    // (email: string, password: string): boolean => {
+    //     if (email === mockDB.email && password === mockDB.password){
+    //         setUser({
+    //             firstname: mockDB.firstname,
+    //             lastname: mockDB.lastname,
+    //             email: mockDB.email,
+    //             password: mockDB.password
+    //         });
+    //         router.push("./myAccount");
+    //         return true;
+    //     } else if (!email || !password){
+    //         return true
+    //     }
+    //     else {
+    //         return false
+    //     }
+    // };
 
     const signOut = () => {
         setUser(null);
@@ -85,7 +97,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-        <UserContext.Provider value={{ user, signIn, signOut, updateUser }}>
+        <UserContext.Provider value={{ user, signIn, signUp, signOut, updateUser }}>
             {children}
         </UserContext.Provider>
     )

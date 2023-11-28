@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'httphttp://localhost:5000'})
+const API = axios.create({ baseURL: 'http://127.0.0.1:5000'})
 
 export const fetchUser = (username) => API.get(`/user/${username}`);
 export const createUser = (newUser) => API.post('/user', newUser);
+export const updateUser = (username, userData) => API.put(`/user/${username}`, userData)
 
 export default API;
