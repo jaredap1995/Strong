@@ -1,9 +1,12 @@
 import { createContext, useContext, ReactNode, useState } from 'react';
 import { useRouter } from "next/router";
-import { fetchUser, createUser } from "../data/api";
+import { fetchUser, createUser, updateUser } from "../data/api";
+import { get } from 'jquery';
 
 
 type User = {
+    id: number | undefined;
+    username: string | undefined;
     firstname: string | undefined;
     lastname: string | undefined;
     email: string | undefined;
@@ -15,7 +18,7 @@ type UserContextType = {
     signIn: (email: string, password: string) => Promise<boolean>;
     signUp: (data: UserData) => Promise<boolean>;
     signOut: () => void;
-    updateUser: (newDetails: User | null) => void;
+    updateDetails: (newDetails: User | null) => void;
 }
 
 type UserData = {
@@ -81,23 +84,28 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setUser(null);
     }
 
-    const updateUser = (newDetails: User | null) => {
-        setUser((currentUser) => {
-            // Run call to backend database to change current User based on new updated
-            // user data
+    const updateDetails = async (newDetails: User | null) => {
+        if (!newDetails || !newDetails.username ){
+            console.error("Invalid user details")
+            return;
+        }
+        try {
+            const response = await updateUser(newDetails.id, newDetails);
+            if (response.status !== 200) {
+                throw new Error("Error updating User")
+            }
+            const updatedUser = await fetchUser(newDetails.email);
+            setUser(updatedUser.data);
+        } catch (error: unknown) {
+            console.error("Error updating User: ", (error as Error).message)
 
-            return {
-                ...currentUser,
-                firstname: newDetails?.firstname ?? currentUser?.firstname,
-                lastname: newDetails?.lastname ?? currentUser?.lastname,
-                email: newDetails?.email ?? currentUser?.email,
-                password: newDetails?.password ?? currentUser?.password,
-            };
-        });
+            setUser(user)
+        }
+        
     };
 
     return (
-        <UserContext.Provider value={{ user, signIn, signUp, signOut, updateUser }}>
+        <UserContext.Provider value={{ user, signIn, signUp, signOut, updateDetails }}>
             {children}
         </UserContext.Provider>
     )

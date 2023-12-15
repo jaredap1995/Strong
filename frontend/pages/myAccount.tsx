@@ -11,9 +11,11 @@ var MyAccount: React.FC = () => {
     const [isDetails, setIsDetails] = useState(true);
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const { user, updateUser } = useUser();
+    const { user, updateDetails } = useUser();
 
     const [detailsData, setDetailsaData] = useState({
+        id: user?.id,
+        username: user?.username,
         firstname: user?.firstname,
         lastname: user?.lastname,
         email: user?.email,
@@ -27,7 +29,7 @@ var MyAccount: React.FC = () => {
             detailsData.lastname !== user?.lastname || 
             detailsData.password !== user?.password || 
             detailsData.email !== user?.email) {
-            updateUser(detailsData)
+            updateDetails(detailsData)
         }
 
         setIsEditMode(false)
@@ -45,6 +47,8 @@ var MyAccount: React.FC = () => {
     const router = useRouter()
     const handleCancel = () => {
         setDetailsaData({
+            id: user?.id,
+            username: user?.username || '',
             firstname: user?.firstname || '',
             lastname: user?.lastname || '',
             email: user?.email || '', 
@@ -57,6 +61,8 @@ var MyAccount: React.FC = () => {
     useEffect(() => {
         if (user) {
             setDetailsaData({
+                id: user?.id,
+                username: user?.username || '',
                 firstname: user.firstname || '',
                 lastname: user.lastname || '',
                 email: user.email || '', 

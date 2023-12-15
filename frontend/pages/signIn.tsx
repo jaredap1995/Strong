@@ -29,9 +29,11 @@ const SignIn: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         setIsSubmitted(true);
-        const success: boolean = await signIn(formData.email, formData.password);
-        if (!success) {
-            setNoAccount(true)
+        if (formData.email && formData.password){
+            const success: boolean = await signIn(formData.email, formData.password);
+            if (!success) {
+                setNoAccount(true)
+            }
         }
 
     }
@@ -65,7 +67,7 @@ const SignIn: React.FC = () => {
                                 type="text"
                                 name="email"
                                 className={sharedStyles.waitlistInput}
-                                placeholder="Email"
+                                placeholder="Email or Username"
                                 onChange={handleInputChange}
                                 />
 
